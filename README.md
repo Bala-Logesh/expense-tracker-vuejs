@@ -1,19 +1,14 @@
-# expense-tracker
+# An Expense Tracker Application built using VueJS
 
-## Project setup
-```
-npm install
-```
+- This application is built using VueJS
+- Uses Composition API in VueJS
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Running the application
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Running the frontend
+- Run npm install
+- To start the dev server, run npm run serve
+- Open http://localhost:8080/ in a browser
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Technologies used
+- VueJS

@@ -12,3 +12,7 @@
 
 ## Technologies used
 - VueJS
+
+## App Screenshot
+
+![Expense Tracker](./src/assets/app_ss.png)

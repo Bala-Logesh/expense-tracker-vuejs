@@ -2,10 +2,10 @@
   <div>
     <Header />
     <div class="container">
-      <Balance :total="total" />
-      <IncomeExpenses :incomeTotal="incomeTotal" :expenseTotal="expenseTotal" />
-      <TransactionList :transactions="transactions" />
-      <AddTransaction />
+      <Balance :total="+total" />
+      <IncomeExpenses :incomeTotal="+incomeTotal" :expenseTotal="+expenseTotal" />
+      <TransactionList :transactions="transactions" @transactionDeleted="handleTransactionDeleted" />
+      <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
     </div>
   </div>
 </template>
@@ -18,6 +18,9 @@ import TransactionList from './components/TransactionList'
 import AddTransaction from './components/AddTransaction'
 
 import { ref, computed } from 'vue'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 const transactions = ref([
   { id: 1, text: 'Flower', amount: -19.99 },
@@ -27,7 +30,7 @@ const transactions = ref([
 ])
 
 const total = computed(() => {
-  return transactions.value.reduce((acc, t) => acc + t.amount, 0)
+  return transactions.value.reduce((acc, t) => acc + t.amount, 0).toFixed(2)
 })
 
 const incomeTotal = computed(() => {
@@ -37,6 +40,20 @@ const incomeTotal = computed(() => {
 const expenseTotal = computed(() => {
   return transactions.value.filter(t => t.amount < 0).reduce((acc, t) => acc + t.amount, 0).toFixed(2)
 })
+
+const handleTransactionSubmitted = ({ text, amount }) => {
+  const id = Math.floor(Math.random() * 100000)
+  transactions.value.push({ id, text, amount })
+
+  toast.success('Transaction added successfully')
+}
+
+const handleTransactionDeleted = (transactionId) => {
+  console.log(transactionId)
+  transactions.value = transactions.value.filter(t => t.id !== transactionId)
+
+  toast.success('Transaction deleted successfully')
+}
 
 </script>
 
